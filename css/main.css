@@ -1,0 +1,30 @@
+main,footer {
+	padding-left: 240px;
+}
+
+nav .nav-wrapper a {
+	color: #fff;
+}
+
+#img_show,#img_show_2 {
+	padding: 5px;
+}
+.page_previus_next:hover{
+	opacity: 0.3;
+	background-color: #000;
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.footer-copyright a{
+	color: #fff;
+	font-weight: bold;
+}
