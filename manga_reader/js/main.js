@@ -1,12 +1,18 @@
 $(document).ready(function(){
 
 	$(".button-collapse").sideNav();
-	
-	Reader = Reader();
-	Reader.set_element($('#img_show'));
-	Reader.get_chapters('5538baf1719a16856219a34d',$('.chapters'));
+	$('.mangas').material_select();
 
-	$('.chapters').on('change',function () {
+	Reader = Reader();
+
+	Reader.set_element($('.manga_page'));
+
+	$('select.mangas').on('change',function () {
+		var manga_id = $(this).val();
+		Reader.get_chapters(manga_id,$('select.chapters'));
+    });
+
+	$('select.chapters').on('change',function () {
 		var chapter_id = $(this).val();
 		Reader.get_pages(chapter_id);
     });
@@ -19,8 +25,6 @@ $(document).ready(function(){
 	  		case 39:
 	  			$('.page_previus_next.right').trigger('click');
 	  			break;
-	  		default:
-	  			return false;
 	  	}
 
 	});
@@ -44,7 +48,7 @@ $(document).ready(function(){
 
 	});
 
-	var hammerInstance = new Hammer(document.getElementById('img_show'));
+	var hammerInstance = new Hammer(document.getElementById('manga_reader'));
 	
 	hammerInstance.on('swipe', function(ev) {
 	    
@@ -57,30 +61,12 @@ $(document).ready(function(){
 		}
 	});
 
-	var hammerInstance2 = new Hammer(document.getElementById('img_show_2'));
-	
-	hammerInstance2.on('swipe', function(ev) {
-	    
-		if(ev.direction == Hammer.DIRECTION_LEFT){
-			Reader.next_page();
-		}
-
-		if(ev.direction == Hammer.DIRECTION_RIGHT){
-			Reader.previus_page();
-		}
-	});
-
-	$( window ).resize(function() {
-		if($('.hide-on-med-and-up').is(':visible')){
-			reader.set_element($('#img_show_2'))
-		} else {
-			reader.set_element($('#img_show'))
-		}
+	$('.manga_page').on('load',function(){
+		$('.loader').addClass('hide');
+		$('.manga_page').removeClass('img_loading');
 	});
 
 });
-
-
 
 
 

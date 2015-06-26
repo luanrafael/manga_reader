@@ -4,18 +4,19 @@
 		<!--Import materialize.css-->
 	  	<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
 		  <link type="text/css" rel="stylesheet" href="css/main.css"  media="screen,projection"/>
+		  <link type="text/css" rel="stylesheet" href="css/spinner.css"  media="screen,projection"/>
 		<!--Let browser know website is optimized for mobile-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<meta charset="utf8">
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 		<script type="text/javascript" src="hammer/hammer.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/reader.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
 
 	</head>
 
-	<body class="blue-grey darken-2">
+	<body class="blue-grey darken-2" id="manga_reader">
 		<header>
 			<nav class="hide-on-med-and-up blue-grey darken-1 white-text">
 			    	<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -28,6 +29,15 @@
 				</li>
 				<form>
 					<div class="row">
+						<div class="col s12">
+							<select class="mangas">
+								<option>Mangas</option>
+								<option value="4e70ea10c092255ef7004aa2">One Piece</option>
+								<option value="4e70ea03c092255ef70046f0">Naruto</option>
+								<option value="5538baf1719a16856219a34d">Naruto Gaiden</option>
+							</select>
+						</div>
+
 						<div class="col s12">
 							<select class="chapters">
 								<option>Chapter</option>
@@ -56,7 +66,9 @@
 							</h1>
 						</div>
 						<div class="col s8 center">
-							<img id="img_show" src="" class="responsive-img"> </img>
+							<div class="loader">Loading...</div>
+							<img src="" class="manga_page responsive-img">
+							</img>
 						</div>
 						<div class="col s2 page_previus_next right ">
 							<h1 class="valing">
@@ -68,9 +80,10 @@
 			</div>
 		</main>
 
-		<div class="row hide-on-med-and-up">
+		<div class="row hide-on-med-and-up valign-wrapper">
 			<div class="col s12">
-				<img id="img_show_2" src="" class="responsive-img"> </img>
+				<div class="valing loader">Loading...</div>
+				<img src="" class="manga_page responsive-img"> </img>
 			</div>
 		</div>
 		        

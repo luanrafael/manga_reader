@@ -6,7 +6,7 @@ nav .nav-wrapper a {
 	color: #fff;
 }
 
-#img_show,#img_show_2 {
+.manga_page {
 	padding: 5px;
 }
 .page_previus_next:hover{
@@ -27,4 +27,8 @@ main {
 .footer-copyright a{
 	color: #fff;
 	font-weight: bold;
+}
+
+img.img_loading {
+	opacity: 0.3;
 }

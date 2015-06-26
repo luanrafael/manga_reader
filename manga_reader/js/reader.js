@@ -4,9 +4,24 @@ Reader = function(){ return {
     index : 0,
     chapter_id: 0,
     element: null,
-
+    mangas: [],
+    get_mangas: function(){
+    	var url = 'https://www.mangaeden.com/api/list/0/';
+    	reader = this;
+    	$.ajax({
+			url: url,
+			success: function(response){
+				if(response){
+					reader.mangas = builder_manga(response.manga);
+				}
+			},
+			error: function(e,x,t){
+				console.log(e,x,t);
+			}
+		});
+    },
 	get_chapters : function (manga_id,element){
-		url = 'https://www.mangaeden.com/api/manga/' + manga_id + '/';
+		var url = 'https://www.mangaeden.com/api/manga/' + manga_id + '/';
 		$.ajax({
 			url: url,
 			success: function(response){
@@ -31,6 +46,9 @@ Reader = function(){ return {
 		reader = this;
 		$.ajax({
 			url: url,
+			beforeSend: function(){
+				$('.loader').removeClass('hide');
+			},
 			success: function(response){
 				if(response){
 					images = response.images;
@@ -59,6 +77,7 @@ Reader = function(){ return {
 		if(this.index < 0) {
 			this.index = 0;
 		}
+		$('.loader').removeClass('img_loading');
 		$(this.element).attr('src', this.pages[this.index]);
 	},
 
@@ -67,6 +86,8 @@ Reader = function(){ return {
 		if(this.index > this.pages.length - 1){
 			this.index = this.pages.length - 1;
 		}
+		$(this.element).addClass('img_loading');
+		$('.loader').removeClass('hide');
 		$(this.element).attr('src', this.pages[this.index]);
 	},
 
@@ -77,4 +98,20 @@ Reader = function(){ return {
 
 function make_option(value,text){
 	return $("<option value=" + value +"> " + (text||value) + "</option>");
+}
+
+function builder_mangas(data){
+	var mangas = [];
+	for (var i = data.length - 1; i >= 0; i--) {
+		var manga = {
+			title: data[i]['t'],
+			alias: data[i]['a'],
+			status: data[i]['s'],
+			category: data[i]['c'],
+		}
+		mangas.push(manga);
+	};
+
+	return mangas;
+
 }
