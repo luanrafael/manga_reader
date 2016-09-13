@@ -35,12 +35,12 @@ Reader = function(){ return {
 				if(response){
 					images = response.images;
 					reader.pages = [];
-
+					reader.index = 0;
 					for (var i = images.length - 1; i >= 0; i--) {
 						reader.pages.push('https://cdn.mangaeden.com/mangasimg/' + images[i][1]);
 					}
 
-					$(reader.element).attr('src', reader.pages[0]);
+					$(reader.element).attr('src', reader.pages[reader.index]);
 				}
 			},
 			error: function(e,x,t){
